@@ -1,0 +1,7 @@
+AI_API_KEY=2e63a2902046adf0cee42c9043383010
+AI_BASE_URL=https://api.aimlapi.com/v1
+AI_MODEL=google/gemini-3-5-flash
+TAVILY_API_KEY=
+PORT=3000
+NODE_ENV=development
+JWT_SECRET=

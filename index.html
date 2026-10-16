@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>أفق — مساعدك الذكي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- شاشة الدخول -->
+  <section id="auth" class="auth hidden">
+    <div class="auth-card">
+      <div class="brand big"><span class="logo">◐</span><span>أفق</span></div>
+      <p class="tagline">شات، ملفات، أدوات، وتنفيذ مهام — في مكان واحد.</p>
+      <div class="tabs">
+        <button id="tab-login" class="tab active" type="button">دخول</button>
+        <button id="tab-register" class="tab" type="button">حساب جديد</button>
+      </div>
+      <form id="auth-form" autocomplete="on">
+        <input id="f-name" name="name" type="text" placeholder="الاسم" autocomplete="name" class="hidden" />
+        <input id="f-email" name="email" type="email" placeholder="البريد الإلكتروني" autocomplete="email" required dir="ltr" />
+        <input id="f-pass" name="password" type="password" placeholder="كلمة المرور (8 أحرف على الأقل)" autocomplete="current-password" required minlength="8" dir="ltr" />
+        <div id="auth-error" class="error hidden"></div>
+        <button class="primary" id="auth-submit" type="submit">دخول</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- التطبيق -->
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="side-top">
+        <div class="brand"><span class="logo">◐</span><span>أفق</span></div>
+        <button id="btn-close-side" class="icon-btn only-mobile" aria-label="إغلاق">✕</button>
+      </div>
+      <button id="btn-new" class="new-chat" type="button">＋ محادثة جديدة</button>
+      <nav id="chat-list" class="chat-list" aria-label="المحادثات"></nav>
+      <div class="side-bottom">
+        <div class="plan-box">
+          <div class="plan-row"><span id="plan-label">مجاني</span><span id="usage-text">0 / 20</span></div>
+          <div class="meter"><div id="usage-bar"></div></div>
+        </div>
+        <div class="user-row">
+          <span id="user-name" class="user-name"></span>
+          <button id="btn-memory" class="link-btn" type="button">الذاكرة</button>
+          <button id="btn-logout" class="link-btn" type="button">خروج</button>
+        </div>
+      </div>
+    </aside>
+    <div id="scrim" class="scrim hidden"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="btn-open-side" class="icon-btn only-mobile" aria-label="القائمة">☰</button>
+        <div id="chat-title" class="chat-title">محادثة جديدة</div>
+      </header>
+
+      <div id="messages" class="messages" aria-live="polite">
+        <div id="welcome" class="welcome">
+          <div class="logo-lg">◐</div>
+          <h1>إزاي أقدر أساعدك النهارده؟</h1>
+          <div class="suggest">
+            <button type="button" data-q="اعمللي عرض تقديمي من 6 شرائح عن أساسيات الأمن السيبراني للشركات الصغيرة">🎞️ اعمل عرض تقديمي</button>
+            <button type="button" data-q="اعمللي جدول Excel لميزانية شهرية فيها دخل ومصاريف وإجمالي بمعادلات">📊 جدول Excel بمعادلات</button>
+            <button type="button" data-q="دوّر على الإنترنت وقولي آخر الأخبار في عالم الذكاء الاصطناعي مع المصادر">🔎 ابحث وهات المصادر</button>
+            <button type="button" data-q="صحّحلي الكود ده وفسرلي الغلط:&#10;```python&#10;def avg(xs):&#10;    return sum(xs)/len(x)&#10;```">🛠️ صحّح كود</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="composer-wrap">
+        <div id="attach-chips" class="chips"></div>
+        <form id="composer" class="composer">
+          <button id="btn-attach" class="icon-btn" type="button" aria-label="إرفاق ملف أو صورة" title="إرفاق ملف أو صورة">📎</button>
+          <input id="file-input" type="file" class="hidden" />
+          <textarea id="input" rows="1" placeholder="اكتب رسالتك… (Enter للإرسال، Shift+Enter لسطر جديد)" maxlength="20000"></textarea>
+          <button id="btn-send" class="send" type="submit" aria-label="إرسال">↑</button>
+        </form>
+        <div class="fineprint">أفق ممكن يغلط. راجع المعلومات المهمة.</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- نافذة الذاكرة -->
+  <div id="memory-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mem-title">
+    <div class="modal-card">
+      <div class="modal-head"><h2 id="mem-title">الذاكرة</h2><button id="mem-close" class="icon-btn" aria-label="إغلاق">✕</button></div>
+      <p class="muted">معلومات ثابتة عنك بيحفظها أفق عشان يفتكرها في المحادثات الجاية. تقدر تمسح أي حاجة.</p>
+      <ul id="mem-list" class="mem-list"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
